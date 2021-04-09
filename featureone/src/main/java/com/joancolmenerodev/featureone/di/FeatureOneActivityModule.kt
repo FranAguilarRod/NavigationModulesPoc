@@ -1,11 +1,12 @@
 package com.joancolmenerodev.featureone.di
 
-import android.app.Activity
 import com.joancolmenerodev.featureone.FeatureOneActivity
 import com.joancolmenerodev.featureone.FeatureOneContract
 import com.joancolmenerodev.featureone.FeatureOnePresenterImpl
+import com.joancolmenerodev.navigation.FeatureTwoInNavigator
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 
 @Module
 interface FeatureOneActivityModule {
@@ -15,10 +16,17 @@ interface FeatureOneActivityModule {
     ): FeatureOneContract.View
 
     @Binds
-    fun bindActivity(impl: FeatureOneActivity): Activity
-
-    @Binds
     fun bindPresenter(
         impl: FeatureOnePresenterImpl
     ): FeatureOneContract.Presenter
+
+    companion object {
+        @Provides
+        fun providesFeatureOneInNavigator(
+            activity: FeatureOneActivity,
+            factory: FeatureTwoInNavigator.Factory
+        ): FeatureTwoInNavigator {
+            return factory.create(activity)
+        }
+    }
 }

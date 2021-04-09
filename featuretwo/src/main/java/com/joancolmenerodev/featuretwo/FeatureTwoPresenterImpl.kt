@@ -1,7 +1,6 @@
 package com.joancolmenerodev.featuretwo
 
-import com.joancolmenerodev.navigation.di.NavigationAction
-import com.joancolmenerodev.navigation.di.NavigationStarter
+import com.joancolmenerodev.navigation.FeatureOneInNavigator
 import javax.inject.Inject
 
 interface FeatureTwoContract {
@@ -15,18 +14,13 @@ interface FeatureTwoContract {
     }
 }
 
-interface FromFeatureTwo {
-    fun openFeatureOne(): NavigationAction
-}
-
 class FeatureTwoPresenterImpl @Inject constructor(
     private val view: FeatureTwoContract.View,
-    private val navigationStarter: NavigationStarter,
-    private val fromFeatureTwo: FromFeatureTwo,
+    private val navigator: FeatureOneInNavigator,
 ) : FeatureTwoContract.Presenter {
 
     override fun goBack() {
         view.showMessage("See you later alligator!")
-        navigationStarter.start(fromFeatureTwo.openFeatureOne())
+        navigator.openFeatureOne()
     }
 }

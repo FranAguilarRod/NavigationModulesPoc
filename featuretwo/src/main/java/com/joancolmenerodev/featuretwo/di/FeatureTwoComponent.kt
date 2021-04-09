@@ -1,17 +1,16 @@
 package com.joancolmenerodev.featuretwo.di
 
 import com.joancolmenerodev.featuretwo.FeatureTwoActivity
-import com.joancolmenerodev.featuretwo.FromFeatureTwo
-import dagger.BindsInstance
+import com.joancolmenerodev.navigation.di.NavigationComponent
 import dagger.Component
 
-@Component
+@Component(dependencies = [NavigationComponent::class])
 interface FeatureTwoComponent {
 
     fun featureTwoComponent(): FeatureTwoActivity.Component.Factory
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance from: FromFeatureTwo): FeatureTwoComponent
+        fun create(navigationComponent: NavigationComponent): FeatureTwoComponent
     }
 }

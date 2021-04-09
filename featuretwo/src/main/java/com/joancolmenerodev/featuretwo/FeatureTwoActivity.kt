@@ -1,6 +1,5 @@
 package com.joancolmenerodev.featuretwo
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,10 +9,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.google.android.material.snackbar.Snackbar
 import com.joancolmenerodev.featuretwo.di.FeatureTwoActivityModule
 import com.joancolmenerodev.featuretwo.di.FeatureTwoComponentProvider
-import com.joancolmenerodev.navigation.di.NavigationStarterModule
-import dagger.Binds
 import dagger.BindsInstance
-import dagger.Module
 import dagger.Subcomponent
 import javax.inject.Inject
 
@@ -61,7 +57,7 @@ class FeatureTwoActivity : AppCompatActivity(), FeatureTwoContract.View {
         presenter.goBack()
     }
 
-    @Subcomponent(modules = [FeatureTwoActivityModule::class, NavigationStarterModule::class])
+    @Subcomponent(modules = [FeatureTwoActivityModule::class])
     interface Component {
         fun inject(activity: FeatureTwoActivity)
 

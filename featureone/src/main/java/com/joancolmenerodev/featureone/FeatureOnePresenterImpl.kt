@@ -1,7 +1,6 @@
 package com.joancolmenerodev.featureone
 
-import com.joancolmenerodev.navigation.di.NavigationAction
-import com.joancolmenerodev.navigation.di.NavigationStarter
+import com.joancolmenerodev.navigation.FeatureTwoInNavigator
 import javax.inject.Inject
 
 interface FeatureOneContract {
@@ -15,21 +14,16 @@ interface FeatureOneContract {
     }
 }
 
-interface FromFeatureOne {
-    fun openFeatureTwo(title: String, url: String): NavigationAction
-}
-
 class FeatureOnePresenterImpl @Inject constructor(
     private val view: FeatureOneContract.View,
-    private val navigationStarter: NavigationStarter,
-    private val fromFeatureOne: FromFeatureOne
+    private val navigator: FeatureTwoInNavigator,
 ) : FeatureOneContract.Presenter {
 
     override fun openWebsite(title: String?, url: String?) {
         if (title.isNullOrEmpty() || url.isNullOrEmpty()) {
             view.showError("Title or Url shouldn't be empty!")
         } else {
-            navigationStarter.start(fromFeatureOne.openFeatureTwo(title, url))
+            navigator.openFeatureTwo(title, url)
         }
     }
 }
