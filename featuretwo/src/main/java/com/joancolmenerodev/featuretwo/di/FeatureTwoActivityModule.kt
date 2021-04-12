@@ -1,15 +1,19 @@
 package com.joancolmenerodev.featuretwo.di
 
+import android.app.Activity
 import com.joancolmenerodev.featuretwo.FeatureTwoActivity
 import com.joancolmenerodev.featuretwo.FeatureTwoContract
 import com.joancolmenerodev.featuretwo.FeatureTwoPresenterImpl
-import com.joancolmenerodev.navigation.FeatureOneInNavigator
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 
 @Module
 interface FeatureTwoActivityModule {
+    @Binds
+    fun bindActivity(
+        impl: FeatureTwoActivity
+    ): Activity
+
     @Binds
     fun bindView(
         impl: FeatureTwoActivity
@@ -19,14 +23,4 @@ interface FeatureTwoActivityModule {
     fun bindPresenter(
         impl: FeatureTwoPresenterImpl
     ): FeatureTwoContract.Presenter
-
-    companion object {
-        @Provides
-        fun providesFeatureOneInNavigator(
-            activity: FeatureTwoActivity,
-            factory: FeatureOneInNavigator.Factory
-        ): FeatureOneInNavigator {
-            return factory.create(activity)
-        }
-    }
 }

@@ -9,6 +9,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.joancolmenerodev.featureone.di.FeatureOneActivityModule
 import com.joancolmenerodev.featureone.di.FeatureOneComponentProvider
+import com.joancolmenerodev.navigation.di.NavigationModule
 import dagger.BindsInstance
 import dagger.Subcomponent
 import javax.inject.Inject
@@ -45,7 +46,7 @@ class FeatureOneActivity : AppCompatActivity(), FeatureOneContract.View {
         Snackbar.make(findViewById(R.id.root), error, Snackbar.LENGTH_SHORT).show()
     }
 
-    @Subcomponent(modules = [FeatureOneActivityModule::class])
+    @Subcomponent(modules = [FeatureOneActivityModule::class, NavigationModule::class])
     interface Component {
 
         fun inject(activity: FeatureOneActivity)
